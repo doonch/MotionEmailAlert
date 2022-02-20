@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ADMIN_EMAIL=doonch@gmail.com
+ADMIN_EMAIL=my_email@gmail.com
 SUBJECT=$1
 MESSAGE=$2
 BOUNDARY_1=b1_ZoMckD$(date +%s)
