@@ -4,12 +4,14 @@ ADMIN_EMAIL=my_email@gmail.com
 SUBJECT=$1
 FRAME=$2
 MESSAGE=$3
-BOUNDARY_1=b1_$(tr -dc A-Za-z < /dev/urandom | head -c20)
-BOUNDARY_2=b2_$(tr -dc A-Za-z < /dev/urandom | head -c20)
+BOUNDARY_1=b1_ZoMckD$(date +%s)
+BOUNDARY_2=b2_ZoMckD$(date +%s)
+HOSTNAME=$(hostnamectl hostname)
 
 sendmail ${ADMIN_EMAIL} << END_OF_EMAIL
-Subject: ENCRYPTED from $(hostname): ${SUBJECT}
-From: ${USER}
+Subject: ENCRYPTED from ${HOSTNAME}: ${SUBJECT}
+From: ${USER^} <${USER}@${HOSTNAME}>
+To: ${ADMIN_EMAIL}
 Mime-Version: 1.0
 Content-Type: multipart/encrypted; boundary=${BOUNDARY_1}; protocol="application/pgp-encrypted";
 Content-Disposition: inline
@@ -33,6 +35,7 @@ Content-Disposition: inline
 $(~/scripts/greet.sh)
 This message was sent on $(date).
 Battery $(~/scripts/power.sh)
+$(ls -1 ${HOME}/frames|wc -l) frames saved.
 
 ${MESSAGE}
 
@@ -40,7 +43,6 @@ Enjoy your day!
 
 -
 ${USER}
-
 
 --${BOUNDARY_2}
 Content-Type: image/jpeg
