@@ -35,7 +35,7 @@ Content-Disposition: inline
 $(~/scripts/greet.sh)
 This message was sent on $(date).
 Battery $(~/scripts/power.sh)
-$(ls -1 ${HOME}/frames|wc -l) frames saved.
+$(ls -1 ${FRAMES_DIR}|wc -l) frames saved.
 
 ${MESSAGE}
 
