@@ -1,3 +1,5 @@
 #!/bin/bash
-LAST_FRAME=${HOME}/frames/$(ls -1tr ${HOME}/frames/|tail -n1)
-${HOME}/scripts/send_pgpmime.sh Motion ${LAST_FRAME} 'Motion ended.'
+source ${HOME}/scripts/config.sh
+
+LAST_FRAME=${FRAMES_DIR}/$(ls -1tr ${FRAMES_DIR}/|tail -n1)
+${HOME}/scripts/send_pgpmime.sh Motion 'Motion ended.' ${LAST_FRAME}

@@ -14,12 +14,37 @@ Either way, here it is.
 * [Postfix](http://www.postfix.org)
 * [Motion](https://motion-project.github.io)
 * [Gnupg](https://www.gnupg.org)
+* The `hostname` command is required. It may be available already, on Arch Linux install `inetutils`.
 
 # Set up Postfix
-(TBA)
+Nothing to do here, the default configuration is good enough. Consider setting `myhostname` for good measure.
 
 # Set up Gnupg
-(TBA)
+Import the Admin's public key, and set the trust for that key.
+
+```
+$ gpg --search-keys my_email@gmail.com
+
+$ gpg --edit-key <KeyId> trust
+```	
 
 # Set up Motion
-(TBA)
+Add the following hooks in `/etc/motion/motion.conf`; replace `localuser` with your local username.
+
+```
+# Command to be executed when an event starts.
+on_event_start /home/localuser/scripts/motion_detected.sh
+
+# Command to be executed when an event ends.
+on_event_end /home/localuser/scripts/motion_ended.sh
+```
+
+Turn on saving frames when motion detected, and set the target folder for frames:
+
+```
+# Target directory for pictures, snapshots and movies
+target_dir /home/localuser/frames
+
+# Output pictures when motion is detected
+picture_output on
+```
